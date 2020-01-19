@@ -20,6 +20,12 @@ import java.util.List;
 
 
 public class SsoConfluenceLoginServlet extends SsoLoginServlet {
+	
+        public SsoConfluenceLoginServlet (PluginSettingsFactory pluginSettingsFactory) {
+	    saml2Config = new SAMLConfluenceConfig();
+            saml2Config.setPluginSettingsFactory(pluginSettingsFactory);
+        }	
+	
 	protected void authenticateUserAndLogin(HttpServletRequest request,
 			HttpServletResponse response, String username)
 			throws Exception {
