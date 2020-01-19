@@ -31,6 +31,8 @@ import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.spring.container.ContainerManager;
 import com.atlassian.user.Group;
 import org.apache.commons.lang.StringUtils;
+import com.atlassian.sal.api.pluginsettings.PluginSettings;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 import com.atlassian.confluence.core.ConfluenceActionSupport;
 import com.bitium.saml.X509Utils;
@@ -49,15 +51,16 @@ public class ConfigureAction extends ConfluenceActionSupport {
 	private String maxAuthenticationAge;
 	private ArrayList<String> existingGroups;
 
-
 	private SAMLConfluenceConfig saml2Config;
 
 	public void setSaml2Config(SAMLConfluenceConfig saml2Config) {
 		this.saml2Config = saml2Config;
 	}
 
-	public ConfigureAction() {
-	}
+        public ConfigureAction(PluginSettingsFactory pluginSettingsFactory) {
+	    saml2Config = new SAMLConfluenceConfig();
+            saml2Config.setPluginSettingsFactory(pluginSettingsFactory);
+        }
 
 	public String getIdpRequired() {
 		return idpRequired;
