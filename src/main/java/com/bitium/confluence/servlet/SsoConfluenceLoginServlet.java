@@ -13,6 +13,8 @@ import com.atlassian.user.impl.DefaultUser;
 import com.atlassian.user.security.password.Credential;
 import com.bitium.confluence.config.SAMLConfluenceConfig;
 import com.bitium.saml.servlet.SsoLoginServlet;
+import com.atlassian.sal.api.pluginsettings.PluginSettings;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
