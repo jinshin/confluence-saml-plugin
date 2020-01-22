@@ -22,11 +22,8 @@
 AJS.$(function() {
   if (AJS.$(".aui.login-form-container").length) {
     AJS.$(".aui.login-form-container").hide();
-<<<<<<< HEAD
+
     AJS.$('<div class="field-group"><a class="aui-button aui-style aui-button-primary" href="plugins/servlet/saml/auth" style="align:center;">Fraglab SSO Login</a></div><h2 style="margin-top:10px"></h2>').insertAfter(AJS.$(".aui.login-form-container #action-messages"));
-=======
-    AJS.$('<div class="field-group"><a class="aui-button aui-style aui-button-primary" href="plugins/servlet/saml/auth" style="align:center;">SSO Login</a></div><h2 style="margin-top:10px"></h2>').insertAfter(AJS.$(".aui.login-form-container #action-messages"));
->>>>>>> d18d39ebc88c37d1e497c62e49a92136f519f0c0
 
     var query = location.search.substr(1);
     query.split("&").forEach(function(part) {
