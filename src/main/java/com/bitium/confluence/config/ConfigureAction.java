@@ -42,6 +42,7 @@ public class ConfigureAction extends ConfluenceActionSupport {
 
 	private String loginUrl;
 	private String logoutUrl;
+	private String buttonText;
 	private String entityId;
 	private String autoCreateUser;
 	private String defaultAutoCreateUserGroup;
@@ -100,6 +101,14 @@ public class ConfigureAction extends ConfluenceActionSupport {
 
 	public void setLogoutUrl(String logoutUrl) {
 		this.logoutUrl = logoutUrl;
+	}
+
+        public String getButtonText() {
+		return buttonText;
+	}
+
+	public void setButtonText(String buttonText) {
+		this.buttonText = buttonText;
 	}
 
 	public String getLoginUrl() {
@@ -208,6 +217,7 @@ public class ConfigureAction extends ConfluenceActionSupport {
 	public String doDefault() throws Exception {
 		setLoginUrl(saml2Config.getLoginUrl());
 		setLogoutUrl(saml2Config.getLogoutUrl());
+		setButtonText(saml2Config.getButtonText());
 		setEntityId(saml2Config.getIdpEntityId());
 		setX509Certificate(saml2Config.getX509Certificate());
 		setRedirectUrl(saml2Config.getRedirectUrl());
@@ -250,6 +260,7 @@ public class ConfigureAction extends ConfluenceActionSupport {
 	public String execute() throws Exception {
 		saml2Config.setLoginUrl(getLoginUrl());
 		saml2Config.setLogoutUrl(getLogoutUrl());
+		saml2Config.setButtonText(getButtonText());
 		saml2Config.setEntityId(getEntityId());
 		saml2Config.setX509Certificate(getX509Certificate());
 		saml2Config.setIdpRequired(getIdpRequired());

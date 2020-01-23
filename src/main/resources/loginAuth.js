@@ -20,10 +20,31 @@
  *  along with Pineapple. If not, see <http://www.gnu.org/licenses/>.
  */
 AJS.$(function() {
+
+    function setButtonText() {
+              AJS.$.ajax({
+                url: AJS.contextPath() + "/plugins/servlet/saml/getajaxconfig?param=buttonText",
+                type: "GET",
+                error: function() {},
+                success: function(response) {
+                    if (response != "") {
+                       console.log(response);
+                       logbutton = document.getElementById('idSSOButton');
+                       logbutton.innerHTML=response;
+                    }                 
+		}
+            });
+     }
+
+
   if (AJS.$(".aui.login-form-container").length) {
     AJS.$(".aui.login-form-container").hide();
 
-    AJS.$('<div class="field-group"><a class="aui-button aui-style aui-button-primary" href="plugins/servlet/saml/auth" style="align:center;">Fraglab SSO Login</a></div><h2 style="margin-top:10px"></h2>').insertAfter(AJS.$(".aui.login-form-container #action-messages"));
+    var ButtonText = "Fraglab SSO Login";
+
+    AJS.$('<div class="field-group"><a id="idSSOButton" class="aui-button aui-style aui-button-primary" href="plugins/servlet/saml/auth" style="align:center;">' + ButtonText + '</a></div><h2 style="margin-top:10px"></h2>').insertAfter(AJS.$(".aui.login-form-container #action-messages"));
+
+    setButtonText();
 
     var query = location.search.substr(1);
     query.split("&").forEach(function(part) {
