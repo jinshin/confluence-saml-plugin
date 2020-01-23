@@ -35,6 +35,7 @@ import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 import com.atlassian.confluence.core.ConfluenceActionSupport;
+
 import com.bitium.saml.X509Utils;
 
 public class ConfigureAction extends ConfluenceActionSupport {
@@ -255,6 +256,7 @@ public class ConfigureAction extends ConfluenceActionSupport {
 		}
 		setDefaultAutoCreateUserGroup(defaultAutocreateUserGroup);
 		return super.doDefault();
+		//return "success";
 	}
 
 	public String execute() throws Exception {

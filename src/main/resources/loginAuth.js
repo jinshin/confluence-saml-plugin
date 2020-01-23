@@ -36,6 +36,11 @@ AJS.$(function() {
             });
      }
 
+  //Avoid breaking admin panel
+  if(location.pathname == '/authenticate.action') {
+       console.log("Admin panel, exiting");
+       return;
+  }
 
   if (AJS.$(".aui.login-form-container").length) {
     AJS.$(".aui.login-form-container").hide();
