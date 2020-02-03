@@ -34,13 +34,18 @@ AJS.$(function() {
                     }                 
 		}
             });
-     }
+     };
 
   //Avoid breaking admin panel
   if(location.pathname == '/authenticate.action') {
-       console.log("Admin panel, exiting");
+       //console.log("Admin panel, exiting");
        return;
-  }
+  };
+
+  //We might need local login
+  if(location.search.startsWith('?uselocallogin')) {
+       return;
+  };
 
   if (AJS.$(".aui.login-form-container").length) {
     AJS.$(".aui.login-form-container").hide();
@@ -51,19 +56,23 @@ AJS.$(function() {
 
     setButtonText();
 
+    var errorDetected = 0;
+    
     var query = location.search.substr(1);
     query.split("&").forEach(function(part) {
       var item = part.split("=");
       if (item.length == 2 && item[0] == "samlerror") {
         var errorKeys = {};
-        errorKeys["general"] = "General SAML configuration error";
-        errorKeys["user_not_found"] = "User was not found";
-        errorKeys["plugin_exception"] = "SAML plugin internal error";
-        AJS.$(".aui.login-form-container").show();
+        errorKeys["general"] = "No access. Contact your PM for Confluence account.";
+        errorKeys["user_not_found"] = "No access. Contact your PM for Confluence account.";
+        errorKeys["plugin_exception"] = "No access. Contact your PM for Confluence account.";
+        //AJS.$(".aui.login-form-container").show();
         var message = '<div class="aui-message closeable error">' + errorKeys[item[1]] + '</div>';
         AJS.$(message).insertBefore(AJS.$(".aui.login-form-container"));
       }
     });
+
+    if ( errorDetected == 1 ) { return; };
 
     if (location.search == '?logout=true') {
       $.ajax({

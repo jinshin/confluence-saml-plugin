@@ -49,6 +49,8 @@ public class ConfigureAction extends ConfluenceActionSupport {
 	private String defaultAutoCreateUserGroup;
 	private String x509Certificate;
 	private String idpRequired;
+	private String allowOverride;
+	private String overridePin;
 	private String redirectUrl;
 	private String maxAuthenticationAge;
 	private ArrayList<String> existingGroups;
@@ -71,6 +73,24 @@ public class ConfigureAction extends ConfluenceActionSupport {
 	public void setIdpRequired(String idpRequired) {
 		this.idpRequired = idpRequired;
 	}
+
+	public String getAllowOverride() {
+		return allowOverride;
+	}
+
+	public void setAllowOverride(String allowOverride) {
+		this.allowOverride = allowOverride;
+	}
+
+
+	public String getOverridePin() {
+		return overridePin;
+	}
+
+	public void setOverridePin(String overridePin) {
+		this.overridePin = overridePin;
+	}
+
 
 	public String getX509Certificate() {
 		return x509Certificate;
@@ -197,11 +217,24 @@ public class ConfigureAction extends ConfluenceActionSupport {
 				addActionError(getText("saml2Plugin.admin.x509CertificateInvalid"));
 			}
 		}
+
 		if (StringUtils.isBlank(getIdpRequired())) {
 			setIdpRequired("false");
 		} else {
 			setIdpRequired("true");
 		}
+
+		if (StringUtils.isBlank(getAllowOverride())) {
+			setAllowOverride("false");
+		} else {
+			setAllowOverride("true");
+		}
+
+		if (StringUtils.isBlank(getOverridePin()) & (this.allowOverride == "true") ) {
+                        addActionError(getText("saml2Plugin.admin.needToSetPin"));
+		} 
+
+
 		if (StringUtils.isBlank(getAutoCreateUser())) {
 			setAutoCreateUser("false");
 		} else {
@@ -241,6 +274,17 @@ public class ConfigureAction extends ConfluenceActionSupport {
 			setIdpRequired("false");
 		}
 
+
+		String allowOverride = saml2Config.getAllowOverride();
+
+		if (allowOverride != null) {
+			setAllowOverride(allowOverride);
+		} else {
+			setAllowOverride("false");
+		}
+
+		setOverridePin(saml2Config.getOverridePin());
+
 		String autoCreateUser = saml2Config.getAutoCreateUser();
 		if (autoCreateUser != null) {
 			setAutoCreateUser(autoCreateUser);
@@ -266,6 +310,8 @@ public class ConfigureAction extends ConfluenceActionSupport {
 		saml2Config.setEntityId(getEntityId());
 		saml2Config.setX509Certificate(getX509Certificate());
 		saml2Config.setIdpRequired(getIdpRequired());
+                saml2Config.setAllowOverride(getAllowOverride());
+		saml2Config.setOverridePin(getOverridePin());
 		saml2Config.setRedirectUrl(getRedirectUrl());
 		saml2Config.setAutoCreateUser(getAutoCreateUser());
 		saml2Config.setAutoCreateUserDefaultGroup(getDefaultAutoCreateUserGroup());
