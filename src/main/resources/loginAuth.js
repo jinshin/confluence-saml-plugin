@@ -50,7 +50,7 @@ AJS.$(function() {
   if (AJS.$(".aui.login-form-container").length) {
     AJS.$(".aui.login-form-container").hide();
 
-    var ButtonText = "Fraglab SSO Login";
+    var ButtonText = "SSO Login";
 
     AJS.$('<div class="field-group"><a id="idSSOButton" class="aui-button aui-style aui-button-primary" href="plugins/servlet/saml/auth" style="align:center;">' + ButtonText + '</a></div><h2 style="margin-top:10px"></h2>').insertAfter(AJS.$(".aui.login-form-container #action-messages"));
 
